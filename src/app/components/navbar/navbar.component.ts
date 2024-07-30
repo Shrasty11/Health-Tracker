@@ -1,18 +1,29 @@
 import { Component } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDividerModule} from '@angular/material/divider';
-
+import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { AddWorkoutComponent } from '../add-workout/add-workout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-navbar',
   standalone: true,
+  selector: 'app-navbar',
   imports: [
-    MatToolbarModule,
-    MatDividerModule,
-  ],
+    CommonModule, 
+    MatButtonModule, 
+    MatToolbarModule, 
+    MatDialogModule, 
+    AddWorkoutComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  constructor(public dialog: MatDialog) {}
 
+  openAddWorkoutModal(): void {
+    this.dialog.open(AddWorkoutComponent, {
+      width: '400px'
+    });
+  }
 }

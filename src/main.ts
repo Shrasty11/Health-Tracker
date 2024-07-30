@@ -1,6 +1,29 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+import { AppComponent } from './app/app.component';
+import { NavbarComponent } from './app/components/navbar/navbar.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(),
+    provideRouter([]),
+    importProvidersFrom(
+      MatToolbarModule,
+      MatButtonModule,
+      MatDialogModule,
+      MatInputModule,
+      MatSelectModule,
+      FormsModule
+    ), provideAnimationsAsync(), provideAnimationsAsync()
+  ]
+});
