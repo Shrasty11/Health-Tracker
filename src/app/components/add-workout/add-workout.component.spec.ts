@@ -49,7 +49,7 @@ describe('AddWorkoutComponent', () => {
 
     component.name = 'Test User';
     component.workoutMinutes = 60;
-    component.workoutType = 'Cycling';
+    component.workoutTypes = 'Cycling';
     fixture.detectChanges();
 
     await fixture.whenStable();
@@ -62,7 +62,7 @@ describe('AddWorkoutComponent', () => {
 
     expect(component.name).toBeNull();
     expect(component.workoutMinutes).toBeNull();
-    expect(component.workoutType).toBeNull();
+    expect(component.workoutTypes).toBeNull();
     expect(form.resetForm).toHaveBeenCalled();
 
   });

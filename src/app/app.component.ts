@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AddWorkoutComponent } from './components/add-workout/add-workout.component';
 import { UsersComponent } from './components/users/users.component';
 import { userData } from './app.model';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 @Component({
@@ -22,6 +23,9 @@ import { userData } from './app.model';
     MatTabsModule,
     CommonModule,
     MatIconModule,
+    AddWorkoutComponent,
+    UsersComponent,
+    ChartComponent,
 
   ],
   templateUrl: './app.component.html',

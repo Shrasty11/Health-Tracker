@@ -17,7 +17,7 @@
   
       <mat-form-field class="w-full">
         <mat-label>Workout Type</mat-label>
-        <mat-select [(ngModel)]="workoutType" name="workoutType" required>
+        <mat-select [(ngModel)]="workoutTypes" name="workoutTypes" required>
           <mat-option
             *ngFor="let option of workoutOptions"
             [value]="option.value">
@@ -26,7 +26,7 @@
         </mat-select>
         <mat-icon matSuffix>fitness_center</mat-icon>
         <div
-          *ngIf="form.submitted && form.controls['workoutType']?.invalid"
+          *ngIf="form.submitted && form.controls['workoutTypes']?.invalid"
           class="text-xs">
           Workout Type is required
         </div>

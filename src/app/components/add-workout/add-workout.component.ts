@@ -69,14 +69,14 @@ export class AddWorkoutComponent {
 
   name: string | null = null;
   workoutMinutes: number | null = null;
-  workoutType: string | null = null;
+  workoutTypes: string | null = null;
   workoutOptions = workoutOptions;
 
 
   onSubmit(form: NgForm) {
     const success =(
       this.name,
-      this.workoutType,
+      this.workoutTypes,
       this.workoutMinutes
     );
     if (success) {
