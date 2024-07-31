@@ -15,6 +15,7 @@ export const userData = [
       workouts: [
         { type: 'Swimming', minutes: 60 },
         { type: 'Running', minutes: 20 },
+        
       ],
       totalWorkouts: 2,
       totalMinutes: 80,
@@ -29,4 +30,25 @@ export const userData = [
       totalWorkouts: 2,
       totalMinutes: 90,
     },
+    {
+      id: 4,
+      name: 'Noah',
+      workouts: [
+        { type: 'Swimming', minutes: 30 },
+        { type: 'Cycling', minutes: 30 },
+      ],
+      totalWorkouts: 2,
+      totalMinutes: 60,
+    },
+    {
+      id: 5,
+      name: 'William',
+      workouts: [
+        { type: 'Yoga', minutes: 20 },
+        { type: 'Weightlifting', minutes: 40 },
+      ],
+      totalWorkouts: 2,
+      totalMinutes: 60,
+    },
   ];
+ 
