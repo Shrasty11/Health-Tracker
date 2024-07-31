@@ -6,13 +6,16 @@
         <mat-tab label="All Users Workout List">
             <div class="flex-col space-x-10 pt-6">
                 <!-- <app-add-workout
-                (userAdded)="usersComponent.loadUsers();" >
+                    (userAdded)="usersComponent.loadUsers(); ChartComponent.loadUsers()" >
                 </app-add-workout> -->
                 <app-users #usersComponent></app-users>
             </div>
         </mat-tab>
         <mat-tab label="Workout Progress">
-            <app-chart></app-chart>
+             <!-- <app-add-workout
+                (userAdded)="usersComponent.loadUsers(); ChartComponent.loadUsers()" >
+            </app-add-workout> -->
+            <app-chart #chartComponent></app-chart>
         </mat-tab>
     </mat-tab-group>
 

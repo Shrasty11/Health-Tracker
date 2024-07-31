@@ -23,7 +23,7 @@ bootstrapApplication(AppComponent, {
       MatDialogModule,
       MatInputModule,
       MatSelectModule,
-      FormsModule
+      FormsModule,
     ), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 });

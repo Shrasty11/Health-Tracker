@@ -12,7 +12,6 @@ import { UsersComponent } from './components/users/users.component';
 import { userData } from './app.model';
 import { ChartComponent } from './components/chart/chart.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -26,15 +25,15 @@ import { ChartComponent } from './components/chart/chart.component';
     AddWorkoutComponent,
     UsersComponent,
     ChartComponent,
-
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'Health-Tracker';
 
   @ViewChild('usersComponent') usersComponent!: UsersComponent;
+  @ViewChild('chartComponent') chartComponent!: ChartComponent;
 
   constructor(private dialog: MatDialog) {}
 
@@ -43,7 +42,7 @@ export class AppComponent {
   }
 
   initializeLocalStorage() {
-    if(!localStorage.getItem('workoutData')) {
+    if (!localStorage.getItem('workoutData')) {
       localStorage.setItem('workoutData', JSON.stringify(userData));
     }
   }
@@ -54,9 +53,14 @@ export class AppComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.usersComponent?.loadUsers();
+        this.chartComponent?.loadUsers();
       }
-    })
+    });
+  }
+
+  onUserAdded() {
+    this.chartComponent?.onUserAdded();
   }
 }

@@ -88,5 +88,4 @@ export class UsersComponent implements OnInit, AfterViewInit {
     };
   }
 }
-
 export { User };
