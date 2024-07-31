@@ -12,6 +12,7 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 
 import { User } from '../users/users.model'
+import { ChartService } from '../../services/chart/chart.service';
 
 Chart.register(CategoryScale);
 
@@ -31,6 +32,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   chart: Chart | null = null;
 
   constructor(
+    private chartService: ChartService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -49,6 +51,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
   initializeChart() {
     if (this.users.length > 0 && this.chartRef) {
       this.selectedUser = this.users[0];
+      this.chartService.createChart(
+        this.chartRef.nativeElement,
+        this.selectedUser
+      );
       this.cdr.detectChanges();
     }
   }
@@ -56,6 +62,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   loadUsers() {
     this.users = [{ id: 1, name: 'John Doe', workouts: [], totalWorkouts: 0, totalMinutes: 0 }];
     const workoutDataString = localStorage.getItem('workoutData');
+    console.log("hello", workoutDataString)
     if (workoutDataString) {
       this.users = JSON.parse(workoutDataString);
       if (!this.selectedUser && this.users.length > 0) {
@@ -67,12 +74,13 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   onSelectUser(user: User) {
     this.selectedUser = user;
+    this.chartService.updateChart(user);
   }
 
   onUserAdded() {
     this.loadUsers();
-    // if (this.selectedUser) {
-    //   this.chartService.updateChart(this.selectedUser);
-    // }
+    if (this.selectedUser) {
+      this.chartService.updateChart(this.selectedUser);
+    }
   }
 }

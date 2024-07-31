@@ -9,16 +9,17 @@ describe('ChartComponent', () => {
   let fixture: ComponentFixture<ChartComponent>;
   let cdrMock: jasmine.SpyObj<ChangeDetectorRef>;
 
-  const mockUsers = {
-    id: 1,
-    name: 'John Doe',
-    workouts: [],
-    totalWorkouts: 0,
-    totalMinutes: 0,
-  };
+  const mockUsers = [
+    {
+      id: 1,
+      name: 'John Doe',
+      workouts: [],
+      totalWorkouts: 0,
+      totalMinutes: 0,
+    }
+  ];
 
   beforeEach(async () => {
-
     const cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
 
     await TestBed.configureTestingModule({
@@ -35,7 +36,13 @@ describe('ChartComponent', () => {
     component = fixture.componentInstance;
     cdrMock = TestBed.inject(ChangeDetectorRef) as jasmine.SpyObj<ChangeDetectorRef>;
     component.chartRef = new ElementRef(document.createElement('canvas'));
-    spyOn(component, 'loadUsers').and.returnValue([mockUsers]);
+
+    // Mock the `loadUsers` method to set `users` directly
+    spyOn(component, 'loadUsers').and.callFake(() => {
+      component.users = mockUsers;
+      component.selectedUser = mockUsers[0];
+    });
+
     fixture.detectChanges();
   });
 
@@ -46,7 +53,14 @@ describe('ChartComponent', () => {
   it('should initialize users on ngOnInit', () => {
     component.ngOnInit();
     expect(component.loadUsers).toHaveBeenCalled();
-    expect(component.users?.length).toBe(1);
-    expect(component.users?.[0].name).toBe('John Doe');
+    expect(component.users.length).toBe(1);
+    expect(component.users[0].name).toBe('John Doe');
+  });
+
+  it('should initialize chart on ngAfterViewInit', () => {
+    component.ngOnInit(); // Call to set up users
+    component.ngAfterViewInit(); // Trigger chart initialization
+    expect(component.selectedUser).toBe(mockUsers[0]);
+    // Add more checks related to chart initialization if needed
   });
 });

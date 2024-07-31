@@ -9,17 +9,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { AddWorkoutComponent } from './add-workout.component';
+import { AddWorkoutService } from '../../services/add-workout/add-workout.service';
 import { of } from 'rxjs';
 
 describe('AddWorkoutComponent', () => {
   let component: AddWorkoutComponent;
   let fixture: ComponentFixture<AddWorkoutComponent>;
+  let addWorkoutServiceSpy: jasmine.SpyObj<AddWorkoutService>;
   let dialog: MatDialog;
 
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('AddWorkoutService', ['addWorkout']);
+
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
@@ -29,14 +34,16 @@ describe('AddWorkoutComponent', () => {
         MatInputModule,
         MatSelectModule,
         NoopAnimationsModule,
-        AddWorkoutComponent
-      ]
-    })
-    .compileComponents();
-    
+        AddWorkoutComponent, 
+      ],
+      providers: [{ provide: AddWorkoutService, useValue: spy }],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AddWorkoutComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    addWorkoutServiceSpy = TestBed.inject(
+      AddWorkoutService
+    ) as jasmine.SpyObj<AddWorkoutService>;
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });
@@ -46,6 +53,7 @@ describe('AddWorkoutComponent', () => {
   });
 
   it('should reset form after submission', async () => {
+    addWorkoutServiceSpy.addWorkout.and.returnValue(true); 
 
     component.name = 'Test User';
     component.workoutMinutes = 60;
@@ -64,7 +72,6 @@ describe('AddWorkoutComponent', () => {
     expect(component.workoutMinutes).toBeNull();
     expect(component.workoutTypes).toBeNull();
     expect(form.resetForm).toHaveBeenCalled();
-
   });
 
   it('should open dialog on openDialog call', () => {
@@ -74,5 +81,4 @@ describe('AddWorkoutComponent', () => {
     component.openDialog();
     expect(dialogSpy).toHaveBeenCalled();
   });
-
 });

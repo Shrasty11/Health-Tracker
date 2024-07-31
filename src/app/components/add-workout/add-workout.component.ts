@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Inject,
   Output,
   TemplateRef,
   ViewChild,
@@ -11,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
   MatTooltipDefaultOptions,
@@ -28,6 +30,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { Workout, workoutOptions } from './add-workout.model';
+import { AddWorkoutService } from '../../services/add-workout/add-workout.service';
 
 export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
   showDelay: 200,
@@ -64,6 +67,7 @@ export class AddWorkoutComponent {
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
   constructor(
+    private addWorkoutService: AddWorkoutService,
     public dialog: MatDialog
   ) {}
 
@@ -72,9 +76,8 @@ export class AddWorkoutComponent {
   workoutTypes: string | null = null;
   workoutOptions = workoutOptions;
 
-
   onSubmit(form: NgForm) {
-    const success =(
+    const success = this.addWorkoutService.addWorkout(
       this.name,
       this.workoutTypes,
       this.workoutMinutes
@@ -82,7 +85,7 @@ export class AddWorkoutComponent {
     if (success) {
       form.resetForm();
       this.userAdded.emit();
-      this.dialog.closeAll();
+      this.dialog.closeAll();   
     }
   }
 

@@ -10,7 +10,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app/app.component';
-import { NavbarComponent } from './app/components/navbar/navbar.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
