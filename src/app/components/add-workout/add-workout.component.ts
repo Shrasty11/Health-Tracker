@@ -85,7 +85,8 @@ export class AddWorkoutComponent {
     if (success) {
       form.resetForm();
       this.userAdded.emit();
-      this.dialog.closeAll();   
+      this.dialog.closeAll();  
+      window.location.reload() 
     }
   }
 
