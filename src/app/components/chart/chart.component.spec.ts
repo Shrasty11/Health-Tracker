@@ -37,7 +37,6 @@ describe('ChartComponent', () => {
     cdrMock = TestBed.inject(ChangeDetectorRef) as jasmine.SpyObj<ChangeDetectorRef>;
     component.chartRef = new ElementRef(document.createElement('canvas'));
 
-    // Mock the `loadUsers` method to set `users` directly
     spyOn(component, 'loadUsers').and.callFake(() => {
       component.users = mockUsers;
       component.selectedUser = mockUsers[0];
@@ -58,9 +57,8 @@ describe('ChartComponent', () => {
   });
 
   it('should initialize chart on ngAfterViewInit', () => {
-    component.ngOnInit(); // Call to set up users
-    component.ngAfterViewInit(); // Trigger chart initialization
+    component.ngOnInit(); 
+    component.ngAfterViewInit(); 
     expect(component.selectedUser).toBe(mockUsers[0]);
-    // Add more checks related to chart initialization if needed
   });
 });

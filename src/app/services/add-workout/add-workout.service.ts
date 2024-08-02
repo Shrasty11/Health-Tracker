@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../components/users/users.component'; // Ensure this path is correct
-import { Workout } from '../../components/add-workout/add-workout.model'; // Ensure this path is correct
+import { User } from '../../components/users/users.component'; 
+import { Workout } from '../../components/add-workout/add-workout.model'; 
 
 @Injectable({
   providedIn: 'root',

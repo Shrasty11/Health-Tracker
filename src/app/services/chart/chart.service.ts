@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { User } from '../../components/users/users.model'; // Ensure this path is correct
+import { User } from '../../components/users/users.model'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
-  private chart: Chart | null = null; // Private field to hold the Chart instance
+  private chart: Chart | null = null; 
 
   constructor() {}
 
@@ -19,16 +19,16 @@ export class ChartService {
           labels: user.workouts.map(workout => workout.type),
           datasets: [
             {
-              label: 'Minutes', // Label for the dataset
-              data: user.workouts.map(workout => workout.minutes), // Workout minutes as data
-              borderWidth: 1, // Border width for the bars
+              label: 'Minutes', 
+              data: user.workouts.map(workout => workout.minutes), 
+              borderWidth: 1,
             },
           ],
         },
         options: {
           scales: {
             y: {
-              beginAtZero: true, // Y-axis starts at zero
+              beginAtZero: true,
             },
           },
         },
